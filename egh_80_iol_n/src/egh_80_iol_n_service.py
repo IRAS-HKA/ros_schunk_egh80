@@ -27,7 +27,14 @@ def egh_services():
 
 
 if __name__ == '__main__':
-    rospy.init_node('egh_80_iol_n')
+    myargv = rospy.myargv(argv=sys.argv)
+    
+    # if no ip_addr is used, print usage
+    if len(myargv) < 2:
+        print("usage: rosrun egh_80_iol_n egh_80_iol_n_service.py <ip_address>")
+    else:
+    	rospy.init_node('egh_80_iol_n')
 
-    myGripper = Gripper("192.168.1.210")
-    egh_services()
+    	myGripper = Gripper(ip_adress=myargv[1])
+    	egh_services()
+
